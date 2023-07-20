@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.css';
-import {
-    selectData,
-    selectFilters,
-} from '../../containers/Home/slice/selector';
+import { selectFilters } from '../../containers/Home/slice/selector';
 import MultiSelectDropdown from '../MultiSelectDropdown';
 import Filter, { FilterItem } from '../../types/Filter';
 import DropdownActions from './enums/DropdownActions';

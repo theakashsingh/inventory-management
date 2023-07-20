@@ -1,3 +1,7 @@
+/**
+ * Generates a UUID (Universally Unique Identifier).
+ * @returns {string} The generated UUID.
+ */
 function generateUUID() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
         /[xy]/g,
@@ -9,6 +13,11 @@ function generateUUID() {
     );
 }
 
+/**
+ * Generates dropdown details from the provided data.
+ * @param {Array<object>} data - The input data in the form of an array of objects.
+ * @returns {object} An object containing filters extracted from the data.
+ */
 function generateDropdownDetails(data) {
     const filters = [];
 
@@ -43,6 +52,13 @@ function generateDropdownDetails(data) {
     };
 }
 
+/**
+ * Updates filters and data based on the selected values for a specific filter.
+ * @param {Array<object>} data - The input data in the form of an array of objects.
+ * @param {object} filter - The filter object to be updated with selected values.
+ * @param {Array<any>} selectedValueList - The list of selected values for the filter.
+ * @returns {object} An object containing updated filters and data.
+ */
 function updateFiltersAndDataOnSelect(data, filter, selectedValueList) {
     const existingFitler = filter;
 
@@ -87,6 +103,13 @@ function updateFiltersAndDataOnSelect(data, filter, selectedValueList) {
     };
 }
 
+/**
+ * Updates filters and data based on the removed values for a specific filter.
+ * @param {Array<object>} data - The input data in the form of an array of objects.
+ * @param {object} filter - The filter object to be updated with selected values.
+ * @param {Array<any>} selectedValueList - The list of selected values for the filter.
+ * @returns {object} An object containing updated filters and data.
+ */
 function updateFiltersAndDataOnRemove(data, filter, selectedValueList) {
     const existingFitler = filter;
 
@@ -131,6 +154,10 @@ function updateFiltersAndDataOnRemove(data, filter, selectedValueList) {
     };
 }
 
+/**
+ * Function to handle messages from the main thread (if used in a Web Worker context).
+ * @param {MessageEvent} event - The message event received from the main thread.
+ */
 onmessage = (event) => {
     const { message } = event.data;
     switch (message) {

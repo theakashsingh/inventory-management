@@ -1,8 +1,6 @@
-// indexDbWrapper.ts
-
 interface DataRecord {
     id: number;
-    completeData: any; // Change 'any' to your specific JSON type, if known
+    completeData: any;
 }
 
 // Function to open the IndexDB database
@@ -41,7 +39,7 @@ function saveData(data: any): Promise<void> {
         const transaction = db.transaction('dataStore', 'readwrite');
         const objectStore = transaction.objectStore('dataStore');
 
-        const id = 1; // For simplicity, we'll use a fixed ID here, but you could generate a dynamic one if needed.
+        const id = 1;
         const request = objectStore.put({ id, completeData: data });
 
         request.onsuccess = () => {
@@ -62,7 +60,7 @@ function getData(): Promise<any> {
         const transaction = db.transaction('dataStore', 'readonly');
         const objectStore = transaction.objectStore('dataStore');
 
-        const id = 1; // For simplicity, we're using the fixed ID here, but you can use a dynamic ID if needed.
+        const id = 1;
         const request = objectStore.get(id);
 
         request.onsuccess = (event: any) => {
