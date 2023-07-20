@@ -14,6 +14,7 @@ import MultiSelectDropdown from '../../components/MultiSelectDropdown';
 import Table from '../../components/Table';
 import React from 'react';
 import LinearLoader from '../../components/LinearLoader';
+import { saveData } from '../../services/IndexDbWrapper/rawData';
 
 function Home() {
     const dispatch = useDispatch();
@@ -32,12 +33,13 @@ function Home() {
 
         worker.onmessage = (event) => {
             const details = event.data;
-            console.log(event.data);
 
             dispatch(homeActions.setDropZone(false));
             dispatch(homeActions.updateFilters(details.filters));
-            dispatch(homeActions.setData(details.filteredData));
+            dispatch(homeActions.setData(data));
             dispatch(homeActions.setWorkerActive(false));
+
+            saveData(data);
 
             worker.terminate();
         };

@@ -12,40 +12,158 @@ function generateUUID() {
 function generateDropdownDetails(data) {
     const filters = [];
 
-    data.forEach((item, index) => {
-        Object.keys(item).forEach((key) => {
-            const filtersIndex = filters.findIndex((x) => x.name === key);
+    data.forEach((item) => {
+        Object.keys(item).forEach((key, index) => {
+            if (index !== 0) {
+                const filtersIndex = filters.findIndex((x) => x.name === key);
 
-            const itemValue = item[key];
+                const itemValue = item[key];
 
-            if (filtersIndex !== -1) {
-                if (
-                    itemValue &&
-                    !filters[filtersIndex].defaultValues.includes(itemValue)
-                ) {
-                    filters[filtersIndex].defaultValues.push(itemValue);
+                if (filtersIndex !== -1) {
+                    if (
+                        itemValue &&
+                        !filters[filtersIndex].defaultValues.includes(itemValue)
+                    ) {
+                        filters[filtersIndex].defaultValues.push(itemValue);
+                    }
+                } else {
+                    filters.push({
+                        id: generateUUID(),
+                        defaultValues: [itemValue],
+                        name: key,
+                        selectedValues: [],
+                    });
                 }
-            } else {
-                filters.push({
-                    id: generateUUID(),
-                    defaultValues: [itemValue],
-                    name: key,
-                    selectedValues: [],
-                });
             }
         });
     });
 
     return {
         filters,
-        filteredData: data,
+    };
+}
+
+function updateFiltersAndDataOnSelect(data, filter, selectedValueList) {
+    const existingFitler = filter;
+
+    if (selectedValueList) existingFitler.selectedValues = selectedValueList;
+
+    const updatedData = data.filter((d) =>
+        existingFitler.selectedValues.includes(d[filter.name])
+    );
+
+    const filters = [existingFitler];
+
+    data.forEach((item) => {
+        Object.keys(item).forEach((key, index) => {
+            if (key !== filter.name && index !== 0) {
+                const filtersIndex = filters.findIndex((x) => x.name === key);
+
+                const itemValue = item[key];
+
+                if (filtersIndex !== -1) {
+                    if (
+                        itemValue &&
+                        !filters[filtersIndex].defaultValues.includes(itemValue)
+                    ) {
+                        filters[filtersIndex].defaultValues.push(itemValue);
+                        filters[filtersIndex].selectedValues.push(itemValue);
+                    }
+                } else {
+                    filters.push({
+                        id: generateUUID(),
+                        defaultValues: [itemValue],
+                        name: key,
+                        selectedValues: [itemValue],
+                    });
+                }
+            }
+        });
+    });
+
+    return {
+        filters,
+        data: updatedData,
+    };
+}
+
+function updateFiltersAndDataOnRemove(data, filter, selectedValueList) {
+    const existingFitler = filter;
+
+    if (selectedValueList) existingFitler.selectedValues = selectedValueList;
+
+    const updatedData = data.filter((d) =>
+        existingFitler.selectedValues.includes(d[filter.name])
+    );
+
+    const filters = [existingFitler];
+
+    data.forEach((item) => {
+        Object.keys(item).forEach((key, index) => {
+            if (key !== filter.name && index !== 0) {
+                const filtersIndex = filters.findIndex((x) => x.name === key);
+
+                const itemValue = item[key];
+
+                if (filtersIndex !== -1) {
+                    if (
+                        itemValue &&
+                        !filters[filtersIndex].defaultValues.includes(itemValue)
+                    ) {
+                        filters[filtersIndex].defaultValues.push(itemValue);
+                        filters[filtersIndex].selectedValues.push(itemValue);
+                    }
+                } else {
+                    filters.push({
+                        id: generateUUID(),
+                        defaultValues: [itemValue],
+                        name: key,
+                        selectedValues: [itemValue],
+                    });
+                }
+            }
+        });
+    });
+
+    return {
+        filters,
+        data: updatedData,
     };
 }
 
 onmessage = (event) => {
-    const { message, data } = event.data;
-    if (message === 'fabricate') {
-        const result = generateDropdownDetails(data);
-        postMessage(result);
+    const { message } = event.data;
+    switch (message) {
+        case 'fabricate': {
+            const { data } = event.data;
+            const result = generateDropdownDetails(data);
+            postMessage(result);
+            break;
+        }
+
+        case 'select': {
+            const { data, filter, selectedValueList } = event.data;
+            const result = updateFiltersAndDataOnSelect(
+                data,
+                filter,
+                selectedValueList
+            );
+            postMessage(result);
+            break;
+        }
+
+        case 'remove': {
+            const { data, filter, selectedValueList } = event.data;
+            const result = updateFiltersAndDataOnRemove(
+                data,
+                filter,
+                selectedValueList
+            );
+            postMessage(result);
+            break;
+        }
+
+        default:
+            break;
     }
 };

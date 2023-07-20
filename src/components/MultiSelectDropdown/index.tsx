@@ -13,14 +13,17 @@ const MultiSelectDropdown = (props: Props) => {
     const { defaultValues, onRemove, onSelect, selectedValues, label } = props;
 
     return (
-        <Multiselect
-            isObject={false}
-            options={defaultValues}
-            selectedValues={selectedValues}
-            onSelect={onSelect}
-            onRemove={onRemove}
-            displayValue={label}
-        />
+        <div>
+            {label}:
+            <Multiselect
+                isObject={false}
+                options={defaultValues}
+                selectedValues={selectedValues}
+                onSelect={onSelect}
+                onRemove={onRemove}
+                displayValue={label}
+            />
+        </div>
     );
 };
 export default MultiSelectDropdown;
