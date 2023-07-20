@@ -14,3 +14,8 @@ export const selectIsDropZoneEnable = createSelector(
     selectHome,
     (state) => state.isDropZoneEnable
 );
+
+export const selectIsWorkerActive = createSelector(
+    selectHome,
+    (state) => state.isWorkerActive
+);

@@ -1,0 +1,28 @@
+.loading-container {
+    display: flex;
+    width: 100%;
+}
+
+.blank {
+    height: 5px;
+}
+
+.loading-line {
+    width: 100px;
+    height: 5px;
+    background-color: #29d;
+    position: relative;
+    animation: slideAnimation 2s infinite;
+}
+
+@keyframes slideAnimation {
+    0% {
+        left: 0;
+    }
+    50% {
+        left: calc(100% - 100px);
+    }
+    100% {
+        left: 0;
+    }
+}

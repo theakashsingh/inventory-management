@@ -5,4 +5,5 @@ export default interface HomeState {
     data: DataItemType[];
     filters: Filter[];
     isDropZoneEnable: boolean;
+    isWorkerActive: boolean;
 }

@@ -7,6 +7,7 @@ const initialState: HomeState = {
     data: [],
     filters: [],
     isDropZoneEnable: true,
+    isWorkerActive: false,
 };
 
 export const homeSlice = createSlice({
@@ -21,6 +22,9 @@ export const homeSlice = createSlice({
         },
         setData: (state, action: PayloadAction<DataItemType[]>) => {
             state.data = action.payload;
+        },
+        setWorkerActive: (state, action: PayloadAction<boolean>) => {
+            state.isWorkerActive = action.payload;
         },
     },
 });
