@@ -1,10 +1,11 @@
+import IdGenerator from '../lib/IdGenerator';
 import DataItemType from '../types/DataItemType';
-import Filters from '../types/Filters';
+import Filter from '../types/Filter';
 
 export const generateDropdownDetails = (data: DataItemType[]) => {
-    const filters: Filters[] = [];
+    const filters: Filter[] = [];
 
-    data.forEach((item: Record<string, string | number>) => {
+    data.forEach((item: Record<string, string | number>, index: number) => {
         Object.keys(item).forEach((key) => {
             const filtersIndex = filters.findIndex((x) => x.name === key);
 
@@ -19,6 +20,7 @@ export const generateDropdownDetails = (data: DataItemType[]) => {
                 }
             } else {
                 filters.push({
+                    id: IdGenerator.generateUUIDv4(),
                     defaultValues: [itemValue],
                     name: key,
                     selectedValues: [],

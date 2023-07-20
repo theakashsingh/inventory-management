@@ -1,11 +1,11 @@
-import React from 'react';
 import Multiselect from 'multiselect-react-dropdown';
+import { FilterItem } from '../../types/Filter';
 
 interface Props {
     label: string;
     defaultValues: any[];
-    onSelect: (selectedList: any, selectedItem: any) => void;
-    onRemove: (selectedList: any, selectedItem: any) => void;
+    onSelect: (selectedList: FilterItem[], selectedItem: FilterItem) => void;
+    onRemove: (selectedList: FilterItem[], selectedItem: FilterItem) => void;
     selectedValues: any[];
 }
 
@@ -14,6 +14,7 @@ const MultiSelectDropdown = (props: Props) => {
 
     return (
         <Multiselect
+            isObject={false}
             options={defaultValues}
             selectedValues={selectedValues}
             onSelect={onSelect}

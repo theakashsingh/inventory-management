@@ -3,4 +3,14 @@ import { RootState } from '../../../store/configureStore';
 
 const selectHome = (state: RootState) => state.home;
 
-const selectData = createSelector(selectHome, (state) => state.data);
+export const selectData = createSelector(selectHome, (state) => state.data);
+
+export const selectFilters = createSelector(
+    selectHome,
+    (state) => state.filters
+);
+
+export const selectIsDropZoneEnable = createSelector(
+    selectHome,
+    (state) => state.isDropZoneEnable
+);
