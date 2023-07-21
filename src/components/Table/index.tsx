@@ -8,13 +8,17 @@ interface Props {
 
 const Table = (props: Props) => {
     const { columns, data } = props;
+    console.log(columns,data);
+    
     return (
         <div className={styles['container']}>
             <DataTable
                 columns={columns}
                 data={data}
                 pagination
-                paginationPerPage={20}
+                paginationPerPage={100}
+                responsive
+                fixedHeader
             />
         </div>
     );

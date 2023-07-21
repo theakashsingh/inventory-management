@@ -1,6 +1,6 @@
 import DropZone from '../../components/DropZone';
 import styles from './styles.module.css';
-import { generateDropdownDetails } from '../../utils/generateDropdownDetails';
+// import { generateDropdownDetails } from '../../utils/generateDropdownDetails';
 import DataItemType from '../../types/DataItemType';
 import { useDispatch, useSelector } from 'react-redux';
 import { homeActions } from './slice';
@@ -10,7 +10,7 @@ import {
     selectIsWorkerActive,
 } from './slice/selector';
 import Dropdowns from '../../components/Dropdowns';
-import MultiSelectDropdown from '../../components/MultiSelectDropdown';
+// import MultiSelectDropdown from '../../components/MultiSelectDropdown';
 import Table from '../../components/Table';
 import React from 'react';
 import LinearLoader from '../../components/LinearLoader';

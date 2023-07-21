@@ -1,5 +1,6 @@
 import Multiselect from 'multiselect-react-dropdown';
 import { FilterItem } from '../../types/Filter';
+import styles from './styles.module.css';
 
 interface Props {
     label: string;
@@ -13,8 +14,8 @@ const MultiSelectDropdown = (props: Props) => {
     const { defaultValues, onRemove, onSelect, selectedValues, label } = props;
 
     return (
-        <div>
-            {label}:
+        <div className={styles['container']}>
+            <label htmlFor="">{label}:</label> 
             <Multiselect
                 isObject={false}
                 options={defaultValues}
@@ -22,6 +23,7 @@ const MultiSelectDropdown = (props: Props) => {
                 onSelect={onSelect}
                 onRemove={onRemove}
                 displayValue={label}
+                showCheckbox
             />
         </div>
     );
